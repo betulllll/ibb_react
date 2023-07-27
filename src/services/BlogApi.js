@@ -1,7 +1,6 @@
 // Axios
 import axios from "axios";
 
-
 // Persist  URL
 const BLOG_URL = "/blog/api/v1";
 
@@ -20,7 +19,7 @@ class BlogApi {
         return axios.delete(`${BLOG_URL}/delete/all`);
     }
 
-   /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
     // CREATE
     // http://localhost:4444/blog/api/v1/create
     // {
@@ -50,7 +49,7 @@ class BlogApi {
     }
 
     // UPDATE
-    //  {
+     // {
     //     "header":"header data",
     //     "content":"content data",
     // }
