@@ -1,6 +1,24 @@
 import React, { Component } from 'react'
 
+// CSS Main
+import './main.css'
+
+// image
+import cardPicture from "../assist/img/resim.jpg"
+
+// Router
+import {Link} from "react-router-dom"
+
 export default class Main extends Component {
+    toBlogListconst = () => {
+        function handleClick(e) { 
+          e.preventDefault();
+          <a href="/src/component/blog/BlogList.jsx"></a>
+        } 
+        return ( 
+          <a href="#" onClick={this.handleClick}> Test </a> 
+        ); 
+       }
     render() {
         return (
             <React.Fragment>
@@ -10,10 +28,8 @@ export default class Main extends Component {
                     {/* inline css */}
                     <span style={{"color":"red"}}>Nasılsınız Güzel insanlar.</span> 
                 </div>
+                <button className="btn btn-primary mt-3 mb-3" onClick={this.toBlogList}>/blog/list  buton </button>
 
-                <button className="btn btn-primary mt-3 mb-3">/blog/list  buton </button>
-
-{/* paragrag: */}
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, pariatur deleniti. Impedit neque facere libero dignissimos obcaecati at! Veritatis alias quia ex ut odio voluptas unde illo culpa enim cupiditate.
                 Qui obcaecati ipsa numquam, expedita nam nihil adipisci blanditiis eum mollitia quas optio impedit enim, eaque sequi facilis vel. Autem enim eius inventore deserunt, nobis doloribus porro omnis accusamus quasi.
                 Voluptatibus itaque consequuntur voluptate blanditiis repellendus temporibus reiciendis odio enim adipisci minima deserunt, consequatur dignissimos asperiores assumenda dolor similique id? Ad, tenetur velit a suscipit laboriosam commodi alias unde. Veniam!

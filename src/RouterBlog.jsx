@@ -61,7 +61,7 @@ class RouterBlog extends Component {
                 </div>
 
                 {/* FOOTER */}
-                <Footer copy="&copy; 2021 - 2023 Copyright" />
+                <Footer copy="&copy">{" "}2021 - <span id='{"date_id"}' />/&gt; </Footer>
             </React.Fragment>
         ) //end return
     } //end render
