@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { withTranslation } from 'react-i18next';
+import OtherLanguageReusability from '../internationalization/OtherLanguageReusability';
 
 class Header extends Component {
 
@@ -22,6 +23,8 @@ class Header extends Component {
 
     // Render
     render() {
+        // Object Destructing
+        const { logo, t } = this.props;
 
         //RETURN
         return (
@@ -29,7 +32,8 @@ class Header extends Component {
                 <nav className="navbar navbar-expand-md navbar-dark bg-dark">
                     <div className="container">
                         <a className="navbar-brand" href="#">
-                        <i className={this.props.logo}></i>  
+                            {/* <i className={this.props.logo}></i> */}
+                            <i className={logo}></i>
                         </a>
                         <button
                             className="navbar-toggler d-lg-none"
@@ -46,15 +50,20 @@ class Header extends Component {
                             <ul className="navbar-nav me-auto mt-2 mt-lg-0">
                                 <li className="nav-item">
                                     <a className="nav-link active" href="#" aria-current="page">
-                                        Home <span className="visually-hidden">(current)</span>
+                                        {this.props.t('homepage')} <span className="visually-hidden">(current)</span>
                                     </a>
                                 </li>
                                 <li className="nav-item">
                                     <a className="nav-link" href="#">
-                                        Link
+                                        {t('about')}
                                     </a>
                                 </li>
-                                <li className="nav-item dropdown">
+                                <li className="nav-item">
+                                    <a className="nav-link" href="#">
+                                        {t('blog')}
+                                    </a>
+                                </li>
+                                {/* <li className="nav-item dropdown">
                                     <a
                                         className="nav-link dropdown-toggle"
                                         href="#"
@@ -73,8 +82,10 @@ class Header extends Component {
                                             Action 2
                                         </a>
                                     </div>
-                                </li>
+                                </li> */}
                             </ul>
+                            {/* for language */}
+                            <OtherLanguageReusability />
                             <form className="d-flex my-2 my-lg-0">
                                 <input
                                     className="form-control me-sm-2"

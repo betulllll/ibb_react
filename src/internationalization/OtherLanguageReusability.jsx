@@ -9,8 +9,8 @@ import { withTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 // Flag
-import tr_flag from "../assist/img/flag/tr.png";
-import en_flag from "../assist/img/flag/en.png";
+import tr_flag from "../assist/flag/tr.jpg";
+import en_flag from "../assist/flag/en.jpg";
 import OtherLanguageServices from './OtherLanguageServices';
 
 // FUNCTION
@@ -28,19 +28,19 @@ const internationalizationLanguageService=(languageButtonTrigger)=>{
     // RETURN
     return (
         <React.Fragment>
-            <ul class="list-group list-group-numbered">
-                <li class="list-group-item active">
-                    <Link className="btn btn-primary" onClick={() => internationalizationLanguageService('tr')}>
-                        <img src={tr_flag} />
-                    </Link>
-                </li>
-                <li class="list-group-item active">
-                    <Link className="btn btn-primary" onClick={() => internationalizationLanguageService('en')}>
-                        <img src={en_flag} />
-                    </Link>
-                </li>
-            </ul>
-        </React.Fragment>
+        <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li className="nav-item">
+                <Link className="nav-link" onClick={() => internationalizationLanguageService('tr')}>
+                    <img src={tr_flag} style={{height:"20px"}} alt='tr' />
+                </Link>
+            </li>
+            <li className="nav-item">
+                <Link className="nav-link" onClick={() => internationalizationLanguageService('en')}>
+                    <img src={en_flag} style={{height:"20px"}} alt='en'/>
+                </Link>
+            </li>
+        </ul>
+    </React.Fragment>
     )
 }
 
