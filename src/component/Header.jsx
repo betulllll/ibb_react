@@ -29,7 +29,7 @@ class Header extends Component {
         //RETURN
         return (
             <React.Fragment>
-                <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+                <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
                     <div className="container">
                         <a className="navbar-brand" href="#">
                             {/* <i className={this.props.logo}></i> */}
