@@ -31,6 +31,16 @@ class BlogCreate extends Component {
     })
   }
 
+  // ONCHANGE
+  onChangeInputValue=(event)=>{
+
+  }
+
+  // CREATE SUBMIT
+  createSubmit=async(event) =>{
+  // Browser sen dur bir şey yapma
+  }
+
   //RENDER
   render() {
     //object destructing
