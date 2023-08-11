@@ -19,6 +19,8 @@ class BlogCreate extends Component {
     }; //end constructor
 
     // BIND
+    this.onChangeIsRead = this.onChangeIsRead.bind(this);
+    this.onChangeInputValue = this.onChangeInputValue.bind(this);
   }
 
   // CDM
@@ -32,13 +34,22 @@ class BlogCreate extends Component {
   }
 
   // ONCHANGE
-  onChangeInputValue=(event)=>{
+  onChangeInputValue = (event) => {
+    //1 .YOL
+    // const name=event.target.name;
+    // console.log("name:"+name);
+    // const value=event.target.value;
+    // console.log("value: "+value);
 
-  }
+    //2.YOL
+    const { name, value } = event.target
+    //console.log(name+" "+value);
+    //console.log(`${name} ${value}`);
 
-  // CREATE SUBMIT
-  createSubmit=async(event) =>{
-  // Browser sen dur bir şey yapma
+    // STATE
+    this.setState({
+      [name]: value,
+    })
   }
 
   //RENDER
@@ -64,6 +75,7 @@ class BlogCreate extends Component {
               placeholder={t("blog_header")}
               required={true}
               autoFocus={true}
+              onChange={this.onChangeInputValue}
             />
           </div>
 
@@ -76,17 +88,18 @@ class BlogCreate extends Component {
               name="content"
               required={true}
               placeholder={t("blog_content")}
+              onChange={this.onChangeInputValue}
               rows="6"></textarea>
           </div>
 
           <div className="form-check mb-3">
-            <input 
-            className="form-check-input" 
-            type="checkbox" 
-            onChange={this.onChangeIsRead}
-            id="isReadId"
-            name="isReadId"/>
-            <label   className="form-check-label" htmlFor="isReadId"> Anlaşmayı okunuz mu </label>
+            <input
+              className="form-check-input"
+              type="checkbox"
+              onChange={this.onChangeIsRead}
+              id="isReadId"
+              name="isReadId" />
+            <label className="form-check-label" htmlFor="isReadId"> Anlaşmayı okudunuz mu </label>
           </div>
 
           {/* SUBMIT */}
