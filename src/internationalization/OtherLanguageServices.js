@@ -1,15 +1,12 @@
 import axios from "axios";
 
 // Language
-class OtherLanguageServices{
+class OtherLanguageServices {
 
-// Language Flag Button
-headerAccessLanguageServices(languageButtonTrigger){
-axios.defaults.headers["accept-language"]=languageButtonTrigger;
-
+    // Language Flag Button
+    headerAccessLanguageServices(languageButtonTrigger) {
+        axios.defaults.headers["accept-language"] = languageButtonTrigger;
+    }
 }
 
-
-}
-
-export default new OtherLanguageServices; 
+export default new OtherLanguageServices();

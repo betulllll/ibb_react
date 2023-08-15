@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { withTranslation } from 'react-i18next';
 import BlogApi from '../../services/BlogApi';
+import ReusabilityBlogInput from './ReusabilityBlogInput';
 
 class BlogCreate extends Component {
 
@@ -18,6 +19,8 @@ class BlogCreate extends Component {
       blogDto: {}, //object
       isRead: false, // sözleşme kuralları
       spinnerData: false, //Spinner
+      multipleRequest: false, // çoklu kayıtlara izin verme
+      validationErrors: {}, // Backentten gelen verileri almak
     }; //end constructor
 
     // BIND
@@ -30,7 +33,7 @@ class BlogCreate extends Component {
 
   // FUNCTION
   onChangeIsRead = (event) => {
-    console.log(event.target.checked);
+    //console.log(event.target.checked);
     this.setState({
       isRead: event.target.checked,
     })
@@ -43,15 +46,20 @@ class BlogCreate extends Component {
     // console.log("name:"+name);
     // const value=event.target.value;
     // console.log("value: "+value);
-    
     //2.YOL
     const { name, value } = event.target
     //console.log(name+" "+value);
-    console.log(`${name} ${value}`);
+    //console.log(`${name} ${value}`);
+
+    // Backentten gelen hataları yakalamak
+    const backentErrorHandling = { ...this.state.validationErrors };
+    console.log(backentErrorHandling.errorHandler);
+    backentErrorHandling[name] = undefined;
 
     // STATE
     this.setState({
       [name]: value,
+      backentErrorHandling,
     })
   }
 
@@ -80,27 +88,46 @@ class BlogCreate extends Component {
     // 2.YOL(asyn-await)
     try {
       // SPINNER GÖNDERMEDEN ÖNCE
-      this.setState({ spinnerData: true })
+      this.setState({
+        spinnerData: true,
+        multipleRequest: true
+      })
       // CREATE
       const response = await BlogApi.blogServiceCreate(blogDto);
-      if (response.status == 200) {
-        alert("Ekleme Başarılı")
-        //console.log("Ekleme Başarılı");
+      if (response.status === 200) {
+        //alert("Ekleme Başarılı")
+        console.log("Ekleme Başarılı");
         // SPINNER GÖNDERMEDEN ÖNCE
-        this.setState({ spinnerData: false })
+        this.setState({
+          spinnerData: false,
+          multipleRequest: false
+        })
       }
     } catch (err) {
       console.error(err);
       // HATA SPINNER ÇALIŞSIN
-      this.setState({ spinnerData: true })
-    }
-  }
+      this.setState({
+        //spinnerData: true,
+        multipleRequest: true
+      }); //end setState
+
+      // Backentten gelen Hata varsa yakala
+      if (err.response.data.validationErrors) {
+        this.setState({
+          validationErrors: err.response.data.validationErrors
+        }) //end setState
+      } //end if
+
+    } // end catch
+  } //  end Submit
 
   //RENDER
   render() {
     //object destructing
     const { t } = this.props;
-    const { isRead } = this.state;
+    // Hatayı Yakalama
+    const { isRead, multipleRequest, validationErrors } = this.state;
+    const { header, content } = validationErrors;
 
     // RETURN
     return (
@@ -109,8 +136,9 @@ class BlogCreate extends Component {
 
         <form>
           {/* HEADER */}
+          {/*
           <div className="form-group mb-4">
-            <span>{t("blog_header")}</span>
+            <label>{t("blog_header")}</label>
             <input
               type="text"
               className="form-control"
@@ -121,11 +149,26 @@ class BlogCreate extends Component {
               autoFocus={true}
               onChange={this.onChangeInputValue}
             />
-          </div>
+            <span className="text-danger">{header}</span>
+          </div> 
+          */}
+          <ReusabilityBlogInput
+            type="text"
+            classNameProps="form-control"
+            id="header"
+            name="header"
+            placeholder={t("blog_header")}
+            required={true}
+            autoFocus={true}
+            title="Bu Header alanını lütfen doldurunuz"
+            onChange={this.onChangeInputValue}
+            //errors={this.state.validationErrors.header}
+            errors={header}
+          />
 
           {/* CONTENT */}
           <div className="form-group mb-4">
-            <span>{t("blog_content")}</span>
+            <label>{t("blog_content")}</label>
             <textarea
               className="form-control"
               id="content"
@@ -133,7 +176,9 @@ class BlogCreate extends Component {
               required={true}
               placeholder={t("blog_content")}
               onChange={this.onChangeInputValue}
-              rows="6"></textarea>
+              rows="6"
+              title="Bu Content alanını lütfen doldurunuz"></textarea>
+            <span className="text-danger">{content}</span>
           </div>
 
           <div className="form-check mb-3">
@@ -155,7 +200,7 @@ class BlogCreate extends Component {
           <button
             type="submit"
             className="btn btn-primary mb-5"
-            disabled={!isRead}
+            disabled={(!isRead) || (multipleRequest)}
             onClick={this.createSubmit}>
             {(this.state.spinnerData) && <span className="spinner-border text-warning"></span>}
             {t('submit')}
