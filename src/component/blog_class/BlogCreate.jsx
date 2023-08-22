@@ -21,7 +21,7 @@ class BlogCreate extends Component {
       isRead: false, // sözleşme kuralları
       spinnerData: false, //Spinner
       multipleRequest: false, // çoklu kayıtlara izin verme
-      validationErrors: {}, // Backentten gelen verileri almak
+      validationErrors: {}, // Backendten gelen verileri almak
     }; //end constructor
 
     // BIND
@@ -52,7 +52,7 @@ class BlogCreate extends Component {
     //console.log(name+" "+value);
     //console.log(`${name} ${value}`);
 
-    // Backentten gelen hataları yakalamak
+    // Backendten gelen hataları yakalamak
     const backentErrorHandling = { ...this.state.validationErrors };
     console.log(backentErrorHandling.errorHandler);
     backentErrorHandling[name] = undefined;
@@ -113,7 +113,7 @@ class BlogCreate extends Component {
         multipleRequest: true
       }); //end setState
 
-      // Backentten gelen Hata varsa yakala
+      // Backendten gelen Hata varsa yakala
       if (err.response.data.validationErrors) {
         this.setState({
           validationErrors: err.response.data.validationErrors
