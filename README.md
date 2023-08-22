@@ -6,3 +6,6 @@ GitHub URL [Create React App](https://github.com/facebook/create-react-app).
 
 - Java  ( Backend )
 - React ( Frontend )
+
+Note
+-  MockApi was used in this project.
