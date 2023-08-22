@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withTranslation } from 'react-i18next';
 import BlogApi from '../../services/BlogApi';
-import ResuabilityBlogInput from './ResuabilityBlogInput';
+import ResuabilityBlogInput from './ReusabilityBlogInput';
 import { redirect } from 'react-router-dom';
 
 class BlogCreate extends Component {

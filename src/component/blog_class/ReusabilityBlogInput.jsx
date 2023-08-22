@@ -2,7 +2,7 @@
 import React from 'react'
 
 // FUNCTION
-export default function ResuabilityBlogInput(props) {
+export default function ReusabilityBlogInput(props) {
 
     // props
     const { type, classNameProps, id, name, placeholder, required, autoFocus, onChange, title, errors } = props;
