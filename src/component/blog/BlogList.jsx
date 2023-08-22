@@ -47,32 +47,39 @@ class BlogList extends Component {
   // FUNCTION
   // UPDATE
   update(id) {
+    // Local Storage
+    localStorage.setItem("blog_update_id", id);
     //alert(id);
-    window.open("/blog/update/"+id);
+    window.open("/blog/update/" + id);
   }
 
   // VIEW
   view(id) {
+    // Local Storage
+    localStorage.setItem("blog_view_id", id);
+
     //alert(id);
-    //this.props.history.push("/blog/view/"+id)
-    window.open("/blog/view/"+id);
-    
+    //this.props.history.push(`/blog/view/${id}`);
+    window.open("/blog/view/" + id);
   }
+
+
 
   // DELETE
   delete(id) {
     //alert(id);
     BlogApi.blogServiceDeleteId(id)
-    .then((response)=>{
-      this.setState({
-        blogList:this.state.blogList.filter((temp_filter)=>temp_filter.id!=id)
+      .then((response) => {
+        this.setState({
+          blogList: this.state.blogList.filter((temp_filter) => temp_filter.id != id)
+        })
       })
-    })
-    .catch((err)=>{
-      alert("Veri silmede bir hata var")
-    });
+      .catch((err) => {
+        alert("Veri silmede bir hata var")
+      });
 
   }
+
 
   //RENDER
   render() {
@@ -118,13 +125,27 @@ class BlogList extends Component {
                   </td>
 
                   {/* VIEW */}
+                  {/* <td>
+                    <Link to={
+                      {
+                        pathname: `/blog/view/${temp.id}`,
+                        state: this.state
+                      }
+                    }>
+
+                      <i
+                        className="fa-solid fa-binoculars text-warning text-center"
+                        style={{ "cursor": "pointer" }}
+                      >
+                      </i>
+                    </Link> 
+                  </td> */}
                   <td>
-                    <Link to={`/blog/view/${temp.id}`}>
                     <i
                       className="fa-solid fa-binoculars text-warning text-center"
-                      style={{ "cursor": "pointer" }}>
+                      style={{ "cursor": "pointer" }}
+                      onClick={() => this.view(temp.id)}>
                     </i>
-                    </Link>
                   </td>
 
                   {/* DELETE */}
@@ -137,7 +158,7 @@ class BlogList extends Component {
                           this.delete(temp.id)
                         }
                         else
-                          window.alert("Not Deleted !!!")
+                          window.alert("Silinmedi !!!")
                       }}>
                     </i>
                   </td>

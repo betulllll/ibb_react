@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { withTranslation } from 'react-i18next';
 import BlogApi from '../../services/BlogApi';
-import ReusabilityBlogInput from './ReusabilityBlogInput';
+import ResuabilityBlogInput from './ResuabilityBlogInput';
+import { redirect } from 'react-router-dom';
 
 class BlogCreate extends Component {
 
@@ -94,7 +95,7 @@ class BlogCreate extends Component {
       })
       // CREATE
       const response = await BlogApi.blogServiceCreate(blogDto);
-      if (response.status === 200) {
+      if (response.status == 200) {
         //alert("Ekleme Başarılı")
         console.log("Ekleme Başarılı");
         // SPINNER GÖNDERMEDEN ÖNCE
@@ -102,6 +103,7 @@ class BlogCreate extends Component {
           spinnerData: false,
           multipleRequest: false
         })
+        redirect("/blog/list");
       }
     } catch (err) {
       console.error(err);
@@ -152,7 +154,7 @@ class BlogCreate extends Component {
             <span className="text-danger">{header}</span>
           </div> 
           */}
-          <ReusabilityBlogInput
+          <ResuabilityBlogInput
             type="text"
             classNameProps="form-control"
             id="header"
